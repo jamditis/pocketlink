@@ -6,15 +6,15 @@ This document provides a set of guidelines to help you contribute to the project
 
 ## **Code of Conduct**
 
-This project and everyone participating in it is governed by the [PocketLink Code of Conduct](https://www.google.com/search?q=CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+This project and everyone participating in it is governed by the [PocketLink Code of Conduct](https://github.com/jamditis/pocketlink/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## **How can I contribute?**
 
 ### **Reporting bugs**
 
-If you find a bug, please ensure the bug was not already reported by searching on GitHub under [Issues](https://www.google.com/search?q=https://github.com/jsamditis/pocketlink/issues).
+If you find a bug, please ensure the bug was not already reported by searching on GitHub under [Issues](https://github.com/jsamditis/pocketlink/issues).
 
-If you're unable to find an open issue addressing the problem, [open a new one](https://www.google.com/search?q=https://github.com/jsamditis/pocketlink/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample or an executable test case** demonstrating the expected behavior that is not occurring. Use the "Bug Report" template.
+If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/jsamditis/pocketlink/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample or an executable test case** demonstrating the expected behavior that is not occurring. Use the "Bug Report" template.
 
 ### **Suggesting enhancements**
 
