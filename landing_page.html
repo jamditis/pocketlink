@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketLink - effortless shortlinks, right where you need them.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Define custom fonts and a background gradient animation */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050a18; /* Dark background for contrast */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #10B981, #22C55E, #84CC16, #0D9488);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <!-- Header -->
+    <header class="bg-white/5 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                <span class="text-xl font-bold text-white">PocketLink</span>
+            </div>
+            <a href="#" class="bg-emerald-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105">
+                <!-- TODO: Replace '#' with the actual chrome web store link -->
+                Add to Chrome
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden pt-20 pb-28">
+            <!-- Animated gradient background -->
+            <div class="absolute inset-0 gradient-bg opacity-40"></div>
+            <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left side: Text content -->
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight">Your workflow, <br/>uninterrupted.</h1>
+                    <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-xl mx-auto md:mx-0">Create and copy shortlinks in a single click without ever leaving your page. PocketLink integrates directly into your browser's context menu to make sharing effortless.</p>
+                    <div class="mt-8">
+                        <a href="#" class="bg-emerald-600 text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-emerald-700 transition-all duration-300 inline-block transform hover:scale-105 shadow-lg shadow-emerald-800/40">
+                            <!-- TODO: Replace '#' with the actual chrome web store link -->
+                            Add to Chrome for free
+                        </a>
+                    </div>
+                </div>
+                <!-- Right side: Visual -->
+                <div class="relative">
+                    <div class="glass-card rounded-xl p-4 transform rotate-3">
+                        <div class="bg-gray-800 rounded-lg p-6 shadow-2xl">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-2">Right-click anywhere...</p>
+                            <!-- Stylized context menu -->
+                            <div class="bg-gray-900/70 border border-white/10 rounded-md shadow-lg p-2 animate-pulse">
+                                <div class="flex items-center space-x-3 px-3 py-2 rounded-md bg-emerald-600/50">
+                                    <svg class="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                                    <span class="font-semibold text-white">Create shortlink with PocketLink</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-24 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <!-- Feature 1 -->
+                <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+                    <div>
+                        <span class="text-emerald-400 font-semibold">SEAMLESS</span>
+                        <h2 class="text-3xl font-bold text-white mt-2">Right where you need it</h2>
+                        <p class="mt-4 text-gray-400">PocketLink doesn't live in another tab or a clunky popup. It's built directly into your browser's native right-click menu, making it feel like a natural part of your workflow from day one.</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-8">
+                        <img src="https://placehold.co/500x300/111827/334155?text=Visual+of+Right-Click" alt="A visual showing the right-click menu in action on a webpage" class="rounded-lg shadow-xl">
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                     <div class="order-2 md:order-1">
+                        <span class="text-lime-400 font-semibold">INSTANT</span>
+                        <h2 class="text-3xl font-bold text-white mt-2">Click, copied, done.</h2>
+                        <p class="mt-4 text-gray-400">The moment your shortlink is generated, it's automatically and silently copied to your clipboard. There's no extra step. Just click, and you're ready to paste your link anywhere.</p>
+                    </div>
+                    <div class="order-1 md:order-2 glass-card rounded-xl p-8">
+                        <img src="https://placehold.co/500x300/111827/334155?text=Visual+of+Clipboard" alt="A visual representing text being copied to a clipboard" class="rounded-lg shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section id="install" class="py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-white">Easy setup in minutes</h2>
+                <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+                    <!-- Step 1 -->
+                    <div class="glass-card p-8 rounded-xl border-t-2 border-emerald-500">
+                        <div class="text-5xl font-bold text-emerald-400 mb-4">1</div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Add to your browser</h3>
+                        <p class="text-gray-400">Install the extension from the official Chrome Web Store. It's free, secure, and takes just one click.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="glass-card p-8 rounded-xl border-t-2 border-green-500">
+                        <div class="text-5xl font-bold text-green-400 mb-4">2</div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Get your token</h3>
+                        <p class="text-gray-400">Log in to your Bit.ly account and generate a new <a href="https://app.bitly.com/settings/api/" target="_blank" class="text-emerald-400 hover:underline">generic access token</a> from the API settings.</p>
+                    </div>
+                     <!-- Step 3 -->
+                     <div class="glass-card p-8 rounded-xl border-t-2 border-lime-500">
+                        <div class="text-5xl font-bold text-lime-400 mb-4">3</div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Save your token</h3>
+                        <p class="text-gray-400">Click the PocketLink icon in your browser toolbar, paste your token into the settings page, and click save. You're all set!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Feedback Section -->
+        <section id="feedback" class="py-24 bg-gray-900/70">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-white">Have feedback or an idea?</h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">This is a personal project, and I'd love to hear your thoughts on how to make it better. Found a bug or have a feature request? Please reach out!</p>
+                <div class="mt-8">
+                    <a href="mailto:jamditis@gmail.com?subject=Feedback for PocketLink" class="bg-white/10 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20 transition duration-300">
+                        Send an email
+                    </a>
+                </div>
+                 <p class="mt-4 text-sm text-gray-500">
+                    You can also find me on Twitter: 
+                    <a href="https://twitter.com/jsamditis" target="_blank" class="text-emerald-400 hover:underline">@jsamditis</a>. 
+                    A public GitHub repository is coming soon.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-transparent">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 PocketLink. Developed by Joe Amditis.</p>
+            <div class="mt-2 text-sm">
+                <a href="docs/privacy.html" target="_blank" class="hover:text-gray-300 hover:underline">Privacy policy</a>
+                <span class="mx-2">&middot;</span>
+                <a href="docs/terms.html" target="_blank" class="hover:text-gray-300 hover:underline">Terms of service</a>
+            </div>
+            <p class="text-sm mt-2">This is an unofficial extension and is not affiliated with Bit.ly, Inc.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

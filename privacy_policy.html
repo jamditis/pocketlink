@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy policy - PocketLink</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            color: #000;
+        }
+        a {
+            color: #0052cc;
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 85%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Privacy policy for PocketLink</h1>
+    <p><strong>Last updated:</strong> September 16, 2025</p>
+
+    <p>This privacy policy explains how PocketLink ("we," "us," or "our") handles your information when you use our browser extension. Your privacy and trust are very important to us.</p>
+
+    <h2>What information we collect</h2>
+    <p>PocketLink is designed to be as private as possible. The only piece of data we store is your Bit.ly Generic Access Token.</p>
+    <ul>
+        <li><strong>Bit.ly access token:</strong> This token is required to create shortlinks on your behalf. You provide this token voluntarily on the extension's options page.</li>
+    </ul>
+    <p>We do **not** collect, store, or transmit any other personal information, browsing history, or page content.</p>
+
+    <h2>How we use your information</h2>
+    <ul>
+        <li>Your **Bit.ly access token** is used exclusively to make authenticated API calls to the Bit.ly service (`https://api-ssl.bitly.com/`) for the sole purpose of shortening URLs as you request.</li>
+    </ul>
+
+    <h2>How we store your information</h2>
+    <p>Your Bit.ly access token is stored locally on your computer using the sandboxed <code>chrome.storage.sync</code> API provided by your browser. This method has two key benefits:</p>
+    <ol>
+        <li><strong>Security:</strong> The data is stored securely by your browser and is not accessible by other websites or extensions.</li>
+        <li><strong>Convenience:</strong> If you are signed into your browser's account (e.g., your Google Account), this token will sync securely across your devices, so you only need to set it up once.</li>
+    </ol>
+    <p>We never see or have access to this token. It is stored and used entirely within your own browser.</p>
+
+    <h2>Third-party services</h2>
+    <p>The PocketLink extension communicates with one third-party service: the Bit.ly API. This is necessary for the core functionality of the extension. We are not responsible for the privacy practices of Bit.ly. You can review Bit.ly's privacy policy <a href="https://bitly.com/pages/privacy" target="_blank">here</a>.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this privacy policy from time to time. Any changes will be posted on this page. We encourage you to review this policy periodically.</p>
+
+    <h2>Contact us</h2>
+    <p>If you have any questions about this privacy policy, please feel free to contact us.</p>
+    <p>
+        Joe Amditis<br>
+        Email: <a href="mailto:jamditis@gmail.com">jamditis@gmail.com</a><br>
+        Twitter: <a href="https://twitter.com/jsamditis" target="_blank">@jsamditis</a>
+    </p>
+
+</body>
+</html>
