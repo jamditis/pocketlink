@@ -51,10 +51,10 @@ The extension is now ready to use\!
 
 ## **How to contribute**
 
-Contributions are welcome\! Whether it's a bug report, feature request, or a pull request, we'd love your help. Please read our [**Contributing Guidelines**](https://www.google.com/search?q=CONTRIBUTING.md) to get started.
+Contributions are welcome\! Whether it's a bug report, feature request, or a pull request, we'd love your help. Please read our [**Contributing Guidelines**](https://github.com/jamditis/pocketlink/blob/main/CONTRIBUTING.md) to get started.
 
 ## **License**
 
-This project is licensed under the MIT License. See the [**LICENSE**](https://www.google.com/search?q=LICENSE) file for details.
+This project is licensed under the MIT License. See the [**LICENSE**](https://github.com/jamditis/pocketlink/blob/main/LICENSE) file for details.
 
 *This is an unofficial extension and is not affiliated with, endorsed by, or sponsored by Bit.ly, Inc.*
