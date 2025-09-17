@@ -17,6 +17,8 @@ In many workflows, sharing links is a constant action. The process of copying a 
 * **Minimalist design:** No popups, no extra tabs. Just a simple success notification.  
 * **Privacy-focused:** The extension only requests the permissions it absolutely needs to function and does not track your browsing activity.
 
+![PocketLink logo](https://i.imgur.com/1iq2XKj.png)
+
 ## **Installation**
 
 ### **For users**
