@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **\[1.0.4\] \- 2025-09-17**
+
+### **Fixed**
+
+* **Core Functionality:** Resolved a critical bug preventing the "copy to clipboard" feature from working. The fix replaces a direct call to navigator.clipboard with the chrome.scripting.executeScript API, which is required by the Manifest V3 security model.  
+* **Permissions:** Re-instated the activeTab permission. This grants the necessary temporary, user-invoked permission for the scripting API to function on any webpage without requiring broad host permissions.  
+* **Error Handling:** Added logic to gracefully handle attempts to use the extension on protected browser pages (like edge://extensions), preventing security errors.
+
+### **Changed**
+
+* **Compliance:** Removed all remotely hosted code from welcome.html to comply with Chrome Web Store policy. All styling is now self-contained within the extension package.
+
 ## **\[1.0.1\] \- 2025-09-17**
 
 ### **Fixed**
