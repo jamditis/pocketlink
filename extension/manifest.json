@@ -6,7 +6,6 @@
   "permissions": [
     "contextMenus",
     "storage",
-    "activeTab",
     "scripting",
     "notifications"
   ],
@@ -31,5 +30,6 @@
     "128": "icons/icon128.png"
   }
 }
+
 
 
