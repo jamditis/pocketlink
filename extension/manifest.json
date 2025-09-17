@@ -1,11 +1,14 @@
 {
   "manifest_version": 3,
   "name": "PocketLink",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Right-click on any page to create a shortlink and copy it to your clipboard.",
+  "author": "Joe Amditis",
+  "homepage_url": "https://github.com/jamditis/pocketlink",
   "permissions": [
     "contextMenus",
     "storage",
+    "activeTab",
     "scripting",
     "notifications"
   ],
@@ -30,6 +33,3 @@
     "128": "icons/icon128.png"
   }
 }
-
-
-
