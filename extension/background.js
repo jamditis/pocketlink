@@ -1,7 +1,5 @@
 // background.js
 
-// This function is the correct way to copy text to the clipboard in a Manifest V3 service worker.
-// It injects a small script into the active tab to perform the copy operation.
 const copyToClipboard = async (text, tabId) => {
   try {
     await chrome.scripting.executeScript({
