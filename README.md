@@ -52,6 +52,8 @@ If you'd like to load the extension from the source to test or contribute:
    Click the toggle switch in the top-right corner.  
 4. Load the extension:  
    Click the "Load unpacked" button and select the cloned pocketlink directory.
+5. Review the "Settings" page:
+   Choose the settings that work best for you.
 
 ## **Configuration**
 
