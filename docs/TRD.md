@@ -1,8 +1,8 @@
 # **Technical requirements document: PocketLink**
 
-Author: Joe Amditis  
-Version: 1.0  
-Date: 2025-09-16
+Author: Joe Amditis
+Version: 1.1
+Date: 2025-09-17
 
 ### **1\. System overview**
 
@@ -10,34 +10,55 @@ PocketLink is a browser extension for Chromium-based browsers (Google Chrome, Mi
 
 ### **2\. Architecture and components**
 
-The extension consists of three primary components:
+The extension consists of multiple components supporting three distinct interaction modes:
 
-1. **manifest.json (Manifest V3)**  
-   * **Purpose:** The core configuration file that defines the extension's properties, permissions, and scripts.  
-   * **Key Properties:**  
-     * "manifest\_version": 3  
-     * "name": "PocketLink"  
-     * "permissions": \["contextMenus", "storage", "activeTab", "scripting", "notifications"\]  
-     * "host\_permissions": \["https://api-ssl.bitly.com/"\]  
-     * "background": { "service\_worker": "background.js" }  
-     * "options\_page": "options.html"  
-2. **background.js (Service Worker)**  
-   * **Purpose:** An event-driven script that handles all background logic.  
-   * **Responsibilities:**  
-     * **Initialization:** On the chrome.runtime.onInstalled event, it creates the context menu item.  
-     * **Event Handling:** Listens for the chrome.contextMenus.onClicked event to initiate the link shortening process.  
-     * **API Communication:** Retrieves the access token from chrome.storage.sync and makes an authenticated POST request to the Bit.ly API.  
-     * **Error Handling:** Catches potential network or API errors and displays a user-friendly notification.  
-     * **Coordination:** Triggers the clipboard injection script upon a successful API call.  
-3. **options.html & options.js**  
-   * **Purpose:** A standard HTML/CSS/JS page for user configuration.  
-   * **Functionality:**  
-     * Provides an input field for the user to enter their Bit.ly Generic Access Token.  
-     * Uses options.js to handle DOM events (button clicks).  
-     * Interfaces with the chrome.storage.sync API to securely save and retrieve the token.  
-4. **Injected Content Script (via chrome.scripting)**  
-   * **Purpose:** To gain access to the navigator.clipboard API, which is unavailable in the service worker context.  
-   * **Implementation:** The copyToClipboard function in background.js uses chrome.scripting.executeScript to dynamically inject a small function into the active tab. This function's sole responsibility is to write the provided shortlink text to the clipboard.
+#### **Core Components**
+
+1. **manifest.json (Manifest V3)**
+   * **Purpose:** The core configuration file that defines the extension's properties, permissions, and scripts.
+   * **Key Properties:**
+     * "manifest\_version": 3
+     * "name": "PocketLink"
+     * "permissions": \["contextMenus", "storage", "activeTab", "scripting", "notifications", "offscreen"\]
+     * "host\_permissions": \["https://api-ssl.bitly.com/"\]
+     * "background": { "service\_worker": "background.js" }
+     * "options\_page": "options.html"
+
+2. **background.js (Service Worker)**
+   * **Purpose:** An event-driven script that handles all background logic and mode routing.
+   * **Responsibilities:**
+     * **Initialization:** Creates context menu item on chrome.runtime.onInstalled event
+     * **Event Handling:** Listens for chrome.contextMenus.onClicked to initiate shortening process
+     * **API Communication:** Makes authenticated POST requests to Bit.ly API
+     * **Mode Management:** Routes clipboard operations based on user's selected interaction mode
+     * **Fallback Logic:** Automatically switches to popup mode if preferred clipboard method fails
+     * **Error Handling:** Provides graceful error handling with user-friendly notifications
+
+3. **options.html & options.js**
+   * **Purpose:** Enhanced settings page with dark theme and multiple configuration options.
+   * **Functionality:**
+     * API token input and storage
+     * Radio button selection for interaction modes
+     * Toggle switches for notifications and fallback behavior
+     * Real-time settings validation and user feedback
+     * Modern dark UI with glass card effects and gradient styling
+
+#### **Interaction Mode Components**
+
+4. **Offscreen Document Mode (offscreen.html & offscreen.js)**
+   * **Purpose:** Implements Chrome's official clipboard API for Manifest V3.
+   * **Implementation:** Uses chrome.offscreen.createDocument with CLIPBOARD reason to access navigator.clipboard.writeText in a secure context
+   * **Advantages:** Most reliable, Chrome Web Store compliant, minimal permissions
+
+5. **Content Script Injection Mode**
+   * **Purpose:** Legacy clipboard access via content script injection.
+   * **Implementation:** Uses chrome.scripting.executeScript to inject clipboard code into active tab
+   * **Requirements:** Requires both "scripting" and "activeTab" permissions
+
+6. **Popup Window Mode (popup.html & popup.js)**
+   * **Purpose:** Displays shortlink in popup window for manual copying.
+   * **Implementation:** Opens chrome.windows.create with popup type containing shortlink and copy button
+   * **Advantages:** Most compatible, works on all sites, minimal permissions required
 
 ### **3\. External API specification**
 
@@ -57,6 +78,14 @@ The extension consists of three primary components:
 
 ### **4\. Security considerations**
 
-* **Token Storage:** The user's access token is stored using chrome.storage.sync. This method is the sandboxed, secure storage mechanism recommended for extensions, and it allows the setting to sync across a user's logged-in devices.  
-* **Permissions:** The extension requests the minimum set of permissions required for functionality.  
+* **Token Storage:** The user's access token is stored using chrome.storage.sync. This method is the sandboxed, secure storage mechanism recommended for extensions, and it allows the setting to sync across a user's logged-in devices.
+* **Clipboard Access:** Multiple secure methods available:
+  * **Offscreen API:** Uses Chrome's official clipboard API in isolated context (most secure)
+  * **Content Script Injection:** Executes clipboard code only in user-initiated contexts with activeTab permission
+  * **Popup Window:** Manual copy eliminates need for automatic clipboard access
+* **Permissions Model:**
+  * **Minimal Permissions:** Each interaction mode requests only the permissions it actually needs
+  * **User Choice:** Users can select lower-permission modes (popup) for enhanced privacy
+  * **Fallback Security:** Automatic downgrade to safer methods if preferred mode fails
 * **Host Permissions:** API calls are restricted exclusively to https://api-ssl.bitly.com/, preventing the extension from communicating with any other domains.
+* **Data Isolation:** User preferences stored separately from API tokens for enhanced security.
