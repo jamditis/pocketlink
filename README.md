@@ -11,13 +11,23 @@ In many workflows, sharing links is a constant action. The process of copying a 
 
 ## **Features**
 
-* **Multiple interaction modes:** Choose how PocketLink behaves - auto-copy to clipboard, manual copy from popup, or hybrid fallback mode.
-* **Seamless integration:** Adds a "Create shortlink" option directly to your right-click context menu.
-* **Modern clipboard access:** Uses Chrome's official offscreen API for secure, reliable clipboard operations.
-* **Smart fallback system:** Automatically switches to alternative methods if your preferred mode fails.
-* **Secure storage:** Your Bit.ly access token is stored safely using chrome.storage.sync, allowing it to sync across your devices.
-* **Beautiful design:** Dark-themed interface with glass card effects and gradient styling.
-* **Privacy-focused:** The extension only requests the permissions it absolutely needs to function and does not track your browsing activity.
+  <img src="https://i.imgur.com/oGqQesl.jpeg" align="right"
+  width="300" style="margin-left: 20px;">
+
+  * **Multiple interaction modes:** Choose how PocketLink
+  behaves - auto-copy to clipboard, manual copy from popup, or
+  hybrid fallback mode.
+  * **Seamless integration:** Adds a "Create shortlink" option
+  directly to your right-click context menu.
+  * **Modern clipboard access:** Uses Chrome's official
+  offscreen API for secure, reliable clipboard operations.
+  * **Smart fallback system:** Automatically switches to
+  alternative methods if your preferred mode fails.
+  * **Secure storage:** Your Bit.ly access token is stored
+  safely using chrome.storage.sync.
+  * **Beautiful design:** Dark-themed interface with glass card
+   effects and gradient styling.
+  * **Privacy-focused:** Only requests the permissions it absolutely needs to function and does not track your browsing activity.
 
 ![PocketLink logo](https://i.imgur.com/1iq2XKj.png)
 
