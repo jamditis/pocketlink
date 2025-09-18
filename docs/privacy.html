@@ -32,29 +32,38 @@
 </head>
 <body>
     <h1>Privacy policy for PocketLink</h1>
-    <p><strong>Last updated:</strong> September 16, 2025</p>
+    <p><strong>Last updated:</strong> September 18, 2025</p>
 
     <p>This privacy policy explains how PocketLink ("we," "us," or "our") handles your information when you use our browser extension. Your privacy and trust are very important to us.</p>
 
     <h2>What information we collect</h2>
-    <p>PocketLink is designed to be as private as possible. The only piece of data we store is your Bit.ly Generic Access Token.</p>
+    <p>PocketLink is designed to be as private as possible. We store only the minimal data required for functionality:</p>
     <ul>
-        <li><strong>Bit.ly access token:</strong> This token is required to create shortlinks on your behalf. You provide this token voluntarily on the extension's options page.</li>
+        <li><strong>Bit.ly access token:</strong> Required to create shortlinks on your behalf. You provide this token voluntarily on the extension's options page.</li>
+        <li><strong>User preferences:</strong> Your selected interaction mode (Offscreen/Injection/Popup), notification settings, and fallback behavior preferences. These are stored locally to remember your choices.</li>
+        <li><strong>Temporary shortlink data:</strong> When using popup mode, the generated shortlink is temporarily stored locally until you copy it or close the popup.</li>
     </ul>
-    <p>We do **not** collect, store, or transmit any other personal information, browsing history, or page content.</p>
+    <p>We do <strong>not</strong> collect, store, or transmit any personal information, browsing history, page content, URLs you shorten, or analytics data.</p>
 
     <h2>How we use your information</h2>
     <ul>
-        <li>Your **Bit.ly access token** is used exclusively to make authenticated API calls to the Bit.ly service (`https://api-ssl.bitly.com/`) for the sole purpose of shortening URLs as you request.</li>
+        <li><strong>Bit.ly access token:</strong> Used exclusively to make authenticated API calls to the Bit.ly service (https://api-ssl.bitly.com/) for shortening URLs when you trigger the context menu.</li>
+        <li><strong>User preferences:</strong> Used to customize your extension experience - which interaction mode to use, whether to show notifications, and fallback behavior settings.</li>
+        <li><strong>Temporary shortlink data:</strong> Used only to display the shortened URL in popup mode and is automatically deleted when the popup closes.</li>
     </ul>
 
     <h2>How we store your information</h2>
-    <p>Your Bit.ly access token is stored locally on your computer using the sandboxed <code>chrome.storage.sync</code> API provided by your browser. This method has two key benefits:</p>
+    <p>All data is stored locally on your computer using Chrome's secure storage APIs:</p>
+    <ul>
+        <li><strong>chrome.storage.sync:</strong> Your Bit.ly token and user preferences are stored using this API, which securely syncs across your signed-in devices.</li>
+        <li><strong>chrome.storage.local:</strong> Temporary shortlink data (popup mode only) is stored locally and automatically deleted.</li>
+    </ul>
+    <p>These storage methods provide important benefits:</p>
     <ol>
-        <li><strong>Security:</strong> The data is stored securely by your browser and is not accessible by other websites or extensions.</li>
-        <li><strong>Convenience:</strong> If you are signed into your browser's account (e.g., your Google Account), this token will sync securely across your devices, so you only need to set it up once.</li>
+        <li><strong>Security:</strong> Data is sandboxed and not accessible by other websites or extensions.</li>
+        <li><strong>Privacy:</strong> All data remains on your devices - we never see or have access to it.</li>
+        <li><strong>Convenience:</strong> Settings sync across your Chrome-signed devices automatically.</li>
     </ol>
-    <p>We never see or have access to this token. It is stored and used entirely within your own browser.</p>
 
     <h2>Third-party services</h2>
     <p>The PocketLink extension communicates with one third-party service: the Bit.ly API. This is necessary for the core functionality of the extension. We are not responsible for the privacy practices of Bit.ly. You can review Bit.ly's privacy policy <a href="https://bitly.com/pages/privacy" target="_blank">here</a>.</p>
