@@ -4,6 +4,76 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## **\[1.1.1\] \- 2025-09-18**
+
+### **Fixed**
+
+* **Chrome Web Store Compliance:** Removed all remotely hosted code violations that would cause automatic rejection
+  * Replaced Google Fonts CDN links with web-safe system font stacks in all HTML files
+  * Updated `options.html`, `welcome.html`, and `popup.html` to use local fonts only
+  * Fixed offscreen document error handling to prevent "Receiving end does not exist" console errors
+* **Documentation Updates:** Comprehensive refresh of all project documentation
+  * **FAQ.md:** Complete rewrite with new interaction modes, troubleshooting, and 11 comprehensive Q&As
+  * **PRD.md:** Updated to v1.1 with current feature set and completion status
+  * **privacy.html:** Enhanced with detailed explanations of data storage and new interaction modes
+  * **terms.html:** Updated date and ensured current accuracy
+
+### **Changed**
+
+* **Font System:** Switched from Google Fonts to system font stacks for Chrome Web Store compliance
+  * `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+  * Maintains visual consistency while ensuring policy compliance
+* **Error Handling:** Enhanced offscreen document message sending with proper error catching
+* **Store Readiness:** Created compliant extension package (`pocketlink-v1.1.0-store-ready.zip`)
+
+### **Documentation**
+
+* **Permission Justifications:** Researched and prepared ironclad justifications for Chrome Web Store submission
+* **Privacy Policy:** Updated with detailed explanations of new interaction modes and data handling
+* **FAQ Expansion:** Added troubleshooting guides for each interaction mode and browser compatibility
+* **Chrome Web Store Listing:** Verified all required materials and compliance requirements
+
+## **\[1.1.0\] \- 2025-09-17**
+
+### **Added**
+
+* **Multiple Interaction Modes:** Users can now choose how PocketLink behaves when creating shortlinks:
+  * **Auto-copy to clipboard (Recommended):** Uses Chrome's official offscreen API for clipboard access (Chrome 109+)
+  * **Auto-copy via page injection:** Current method using activeTab + scripting permissions
+  * **Show in popup window:** Displays shortlink in popup for manual copying
+* **Enhanced Settings Page:** Complete redesign with dark theme matching project aesthetic
+  * Radio button selection for interaction modes
+  * Toggle for success/error notifications
+  * Toggle for auto-fallback behavior
+  * Glass card effects and gradient styling
+* **Smart Fallback System:** Automatically falls back to popup mode if preferred clipboard method fails
+* **Offscreen Document Support:** Implements Chrome's recommended clipboard API for Manifest V3
+* **Design Consistency:** All UI components now match the dark theme from docs/index.html
+  * Emerald gradient buttons and accents
+  * Poppins/Inter typography
+  * Glass card backgrounds with backdrop blur
+
+### **Changed**
+
+* **Settings UI:** Complete visual overhaul with modern dark design
+* **Architecture:** Modular system supports multiple clipboard access methods
+* **Error Handling:** More graceful fallbacks and user-friendly error messages
+* **Typography:** Updated to use Poppins for headings and Inter for body text
+
+### **Technical**
+
+* **New Permission:** Added `offscreen` permission for official clipboard API access
+* **New Files:** Added `offscreen.html`, `offscreen.js`, `popup.html`, `popup.js` for new interaction modes
+* **Refactored Background Script:** Cleaner async/await pattern with mode-specific handlers
+* **Storage Schema:** Extended to include user preferences for interaction modes and behaviors
+
+### **Documentation**
+
+* **Updated Landing Page:** Replaced placeholder images with actual PocketLink screenshots
+* **Enhanced README:** Added comprehensive feature descriptions and configuration instructions for multiple interaction modes
+* **Technical Documentation:** Updated TRD.md with accurate architecture and security information
+* **Developer Documentation:** Enhanced CLAUDE.md with new component structure and troubleshooting guidance
+
 ## **\[1.0.4\] \- 2025-09-17**
 
 ### **Fixed**
