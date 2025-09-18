@@ -9,26 +9,27 @@
  * all devices the user is logged into with their Google account.
  */
 const saveOptions = () => {
-  // Get the value from the text input field with the id 'token'.
   const token = document.getElementById('token').value;
+  const interactionMode = document.querySelector('input[name="interactionMode"]:checked')?.value || 'injection';
+  const showNotifications = document.getElementById('showNotifications').checked;
+  const fallbackMode = document.getElementById('fallbackMode').checked;
 
-  // Use the chrome.storage.sync API to save the data.
-  // We save it as an object where the key is 'bitlyToken' and the value is the token string.
-  chrome.storage.sync.set(
-    { bitlyToken: token },
-    () => {
-      // This is a callback function that runs after the save operation is complete.
-      // We use it to provide visual feedback to the user.
-      const status = document.getElementById('status');
-      status.textContent = 'Token saved successfully!';
-      status.style.opacity = 1; // Fade the message in.
+  const settings = {
+    bitlyToken: token,
+    interactionMode: interactionMode,
+    showNotifications: showNotifications,
+    fallbackMode: fallbackMode
+  };
 
-      // After 2 seconds, fade the message out again.
-      setTimeout(() => {
-        status.style.opacity = 0;
-      }, 2000);
-    }
-  );
+  chrome.storage.sync.set(settings, () => {
+    const status = document.getElementById('status');
+    status.textContent = 'Settings saved successfully!';
+    status.style.opacity = 1;
+
+    setTimeout(() => {
+      status.style.opacity = 0;
+    }, 2000);
+  });
 };
 
 /**
@@ -36,16 +37,26 @@ const saveOptions = () => {
  * This ensures that when the user opens the options page, they see their currently saved token.
  */
 const restoreOptions = () => {
-  // Use the chrome.storage.sync API to get the data.
-  // We provide a default value ({ bitlyToken: '' }) in case no token has been saved yet.
-  chrome.storage.sync.get(
-    { bitlyToken: '' },
-    (items) => {
-      // 'items' is the object returned from storage.
-      // We set the value of the 'token' input field to the saved token.
-      document.getElementById('token').value = items.bitlyToken;
+  const defaults = {
+    bitlyToken: '',
+    interactionMode: 'injection',
+    showNotifications: true,
+    fallbackMode: true
+  };
+
+  chrome.storage.sync.get(defaults, (items) => {
+    document.getElementById('token').value = items.bitlyToken;
+
+    // Set radio button selection
+    const modeRadio = document.querySelector(`input[value="${items.interactionMode}"]`);
+    if (modeRadio) {
+      modeRadio.checked = true;
     }
-  );
+
+    // Set checkbox states
+    document.getElementById('showNotifications').checked = items.showNotifications;
+    document.getElementById('fallbackMode').checked = items.fallbackMode;
+  });
 };
 
 // --- Event Listeners ---
