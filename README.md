@@ -1,4 +1,4 @@
-![PocketLink logo](https://i.imgur.com/qPHQw27.png)
+![Screenshot of context menu option for PocketLink use](https://i.imgur.com/1iq2XKj.png)
 # **PocketLink**
 
 **Effortless shortlinks, right where you need them.**
@@ -28,8 +28,6 @@ In many workflows, sharing links is a constant action. The process of copying a 
   * **Beautiful design:** Dark-themed interface with glass card
    effects and gradient styling.
   * **Privacy-focused:** Only requests the permissions it absolutely needs to function and does not track your browsing activity.
-
-![PocketLink logo](https://i.imgur.com/1iq2XKj.png)
 
 ## **Installation**
 
