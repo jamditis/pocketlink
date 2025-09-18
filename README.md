@@ -30,7 +30,7 @@ In many workflows, sharing links is a constant action. The process of copying a 
 
 ## **Installation**
 
-  <img src="https://i.imgur.com/oGqQesl.jpeg" align="right"
+  <img src="https://i.imgur.com/Ua8RDG9.png" align="right"
   width="300" style="margin-left: 20px;">
 
 ### **For users**
