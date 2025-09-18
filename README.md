@@ -10,7 +10,6 @@ PocketLink is a lightweight and secure Chromium browser extension that creates a
 In many workflows, sharing links is a constant action. The process of copying a URL, opening a new tab, navigating to a link shortener, pasting the link, and copying the result is inefficient. PocketLink streamlines this into a single right-click action, saving time and keeping you focused.
 
 ![PocketLink logo](https://i.imgur.com/qPHQw27.png)
-# **PocketLink**
 
 ## **Features**
 
