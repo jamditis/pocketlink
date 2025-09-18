@@ -4,71 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PocketLink options</title>
+    <!-- Using system fonts for Chrome Web Store compliance -->
     <style>
-        /* Basic styling to make the options page clean and readable. */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             padding: 20px;
-            width: 400px;
-            background-color: #f4f5f7;
-            color: #172b4d;
+            width: 500px;
+            background: #050a18;
+            color: #e5e7eb;
+            min-height: 100vh;
         }
         h1 {
-            font-size: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
             margin-top: 0;
+            color: #ffffff;
+        }
+        h2 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 16px;
+            color: #ffffff;
         }
         p {
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
+            color: #d1d5db;
         }
         a {
-            color: #0052cc;
+            color: #10b981;
             text-decoration: none;
+            font-weight: 500;
         }
         a:hover {
+            color: #22c55e;
             text-decoration: underline;
         }
         .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
         label {
             display: block;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: #f3f4f6;
         }
         input[type="text"] {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box; /* Ensures padding doesn't affect the total width */
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
         }
         button {
-            margin-top: 15px;
-            padding: 10px 15px;
+            margin-top: 20px;
+            padding: 12px 24px;
             border: none;
-            background-color: #0052cc;
+            background: linear-gradient(135deg, #10b981, #22c55e);
             color: white;
             font-size: 14px;
             font-weight: 600;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
+            transform: scale(1);
         }
         button:hover {
-            background-color: #0065ff;
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #059669, #16a34a);
         }
-        /* The status message is initially hidden and will fade in when shown. */
         #status {
-            margin-top: 15px;
+            margin-top: 16px;
             font-weight: 600;
-            color: #00875a; /* Green for success */
+            color: #22c55e;
             opacity: 0;
             transition: opacity 0.5s;
+        }
+        .option-group {
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: background-color 0.3s ease;
+        }
+        .option-group:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .option-group input[type="radio"],
+        .option-group input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #10b981;
+        }
+        .option-group label {
+            display: inline-block;
+            margin-bottom: 0;
+            cursor: pointer;
+            color: #f9fafb;
+            font-weight: 500;
+        }
+        .option-group small {
+            color: #9ca3af;
+            font-style: italic;
+            display: block;
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -78,26 +134,62 @@
         <!-- Page title -->
         <h1>PocketLink settings</h1>
 
-        <!-- Explanatory text guiding the user -->
+        <!-- API Token Section -->
         <p>PocketLink uses Bit.ly to shorten links. You'll need a generic access token from your Bit.ly account to continue.</p>
         <p><a href="https://app.bitly.com/settings/api/" target="_blank">Get your access token here.</a></p>
-        
-        <!-- Label for the input field for accessibility -->
-        <label for="token">Your Bit.ly access token</label>
-        <!-- Text input field for the user to paste their token -->
-        <input type="text" id="token" name="token" spellcheck="false">
-        
-        <!-- The save button that will trigger the save logic in options.js -->
-        <button id="save">Save token</button>
 
-        <!-- A div to display a status message, e.g., "Token saved!" -->
+        <label for="token">Your Bit.ly access token</label>
+        <input type="text" id="token" name="token" spellcheck="false">
+
+        <!-- Interaction Mode Section -->
+        <h2>How PocketLink Works</h2>
+        <p>Choose how you want PocketLink to behave when creating shortlinks:</p>
+
+        <div class="option-group">
+            <input type="radio" id="mode-offscreen" name="interactionMode" value="offscreen">
+            <label for="mode-offscreen">
+                <strong>Auto-copy to clipboard (Recommended)</strong><br>
+                <small>Uses modern Chrome clipboard API. Requires Chrome 109+</small>
+            </label>
+        </div>
+
+        <div class="option-group">
+            <input type="radio" id="mode-injection" name="interactionMode" value="injection">
+            <label for="mode-injection">
+                <strong>Auto-copy via page injection</strong><br>
+                <small>Current method. Works on all pages but requires extra permissions</small>
+            </label>
+        </div>
+
+        <div class="option-group">
+            <input type="radio" id="mode-popup" name="interactionMode" value="popup">
+            <label for="mode-popup">
+                <strong>Show in popup window</strong><br>
+                <small>Most reliable option. Click to manually copy the shortlink</small>
+            </label>
+        </div>
+
+        <!-- Additional Settings -->
+        <h2>Additional Settings</h2>
+
+        <div class="option-group">
+            <input type="checkbox" id="showNotifications">
+            <label for="showNotifications">Show success/error notifications</label>
+        </div>
+
+        <div class="option-group">
+            <input type="checkbox" id="fallbackMode">
+            <label for="fallbackMode">Auto-fallback to popup if clipboard fails</label>
+        </div>
+
+        <button id="save">Save Settings</button>
         <div id="status"></div>
     </div>
     
     <div class="footer-links">
-        <a href="docs/privacy.html" target="_blank">Privacy policy</a>
+        <a href="https://github.com/jamditis/pocketlink/blob/main/docs/privacy.html" target="_blank">Privacy policy</a>
         &nbsp;&middot;&nbsp;
-        <a href="docs/terms.html" target="_blank">Terms of service</a>
+        <a href="https://github.com/jamditis/pocketlink/blob/main/docs/terms.html" target="_blank">Terms of service</a>
     </div>
 
     <!-- Link to the JavaScript file that controls this page -->
