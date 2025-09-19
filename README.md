@@ -46,7 +46,7 @@ The recommended way to install PocketLink is from the **Chrome Web Store**.
 If you'd like to load the extension from the source to test or contribute:
 
 1. **Clone the repository:**  
-   git clone \[https://github.com/jamditis/pocketlink.git\](https://github.com/jamditis/pocketlink.git)
+   git clone https://github.com/jamditis/pocketlink.git
 
 2. Open your browser's extensions page:  
    Navigate to chrome://extensions in a Chromium-based browser.  
