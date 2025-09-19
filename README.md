@@ -5,6 +5,8 @@
 
 PocketLink is a lightweight and secure Chromium browser extension that creates a Bit.ly shortlink for the current page and copies it to your clipboard in a single click. It's built to be fast, unobtrusive, and feel like a native part of your browser.
 
+[Click here to view PocketLink in the Chrome Web Store](https://chromewebstore.google.com/detail/pocketlink/fiiplgpcffalbfmbafflbokkghnkcadm?utm_source=item-share-cb).
+
 ## **Why PocketLink?**
 
 In many workflows, sharing links is a constant action. The process of copying a URL, opening a new tab, navigating to a link shortener, pasting the link, and copying the result is inefficient. PocketLink streamlines this into a single right-click action, saving time and keeping you focused.
@@ -37,7 +39,7 @@ In many workflows, sharing links is a constant action. The process of copying a 
 
 The recommended way to install PocketLink is from the **Chrome Web Store**.
 
-*(Link will be added here once the extension is published.)*
+[Click here to view PocketLink via the Chrome Web Store](https://chromewebstore.google.com/detail/pocketlink/fiiplgpcffalbfmbafflbokkghnkcadm?utm_source=item-share-cb).
 
 ### **For developers**
 
