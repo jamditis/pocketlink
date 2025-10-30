@@ -15,39 +15,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Otherwise, create new shortlink (direct popup usage)
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const settings = await chrome.storage.sync.get({
-      bitlyToken: '',
-      showNotifications: true
-    });
+    const response = await chrome.runtime.sendMessage({ action: 'createShortlinkFromPopup' });
 
-    if (!settings.bitlyToken) {
-      showError('Please set your Bit.ly token in extension options');
+    if (!response?.success) {
+      showError(response?.error || 'Unable to create shortlink.');
       return;
     }
 
-    const response = await fetch('https://api-ssl.bitly.com/v4/shorten', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${settings.bitlyToken}`,
-      },
-      body: JSON.stringify({
-        long_url: tab.url,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (data && data.link) {
-      showSuccess(data.link);
-    } else {
-      showError('Invalid response from Bit.ly API');
-    }
+    showSuccess(response.shortUrl);
 
   } catch (error) {
     showError(`Error: ${error.message}`);
@@ -56,33 +31,67 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function showSuccess(shortUrl) {
   const contentDiv = document.getElementById('content');
-  contentDiv.innerHTML = `
-    <div class="url-container">
-      <p class="url" id="shortUrl">${shortUrl}</p>
-    </div>
-    <button class="copy-button" id="copyButton">Copy to Clipboard</button>
-    <div class="status" id="status"></div>
-  `;
+  contentDiv.textContent = '';
 
-  document.getElementById('copyButton').addEventListener('click', async () => {
+  const container = document.createElement('div');
+  container.className = 'url-container';
+
+  const urlParagraph = document.createElement('p');
+  urlParagraph.className = 'url';
+  urlParagraph.id = 'shortUrl';
+  urlParagraph.textContent = shortUrl;
+  container.appendChild(urlParagraph);
+
+  const copyButton = document.createElement('button');
+  copyButton.className = 'copy-button';
+  copyButton.id = 'copyButton';
+  copyButton.textContent = 'Copy to Clipboard';
+
+  const statusDiv = document.createElement('div');
+  statusDiv.className = 'status';
+  statusDiv.id = 'status';
+
+  contentDiv.appendChild(container);
+  contentDiv.appendChild(copyButton);
+  contentDiv.appendChild(statusDiv);
+
+  copyButton.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(shortUrl);
-      document.getElementById('status').innerHTML = '<span class="success">Copied!</span>';
+      copyButton.disabled = true;
+      statusDiv.textContent = 'Copied!';
+      statusDiv.classList.remove('error');
+      statusDiv.classList.add('success');
 
       // Close popup after brief delay
       setTimeout(() => {
         window.close();
       }, 800);
     } catch (error) {
-      document.getElementById('status').innerHTML = '<span class="error">Copy failed</span>';
+      copyButton.disabled = false;
+      statusDiv.textContent = 'Copy failed';
+      statusDiv.classList.remove('success');
+      statusDiv.classList.add('error');
     }
   });
 }
 
 function showError(message) {
   const contentDiv = document.getElementById('content');
-  contentDiv.innerHTML = `
-    <div class="status error">${message}</div>
-    <button class="copy-button" onclick="chrome.runtime.openOptionsPage()">Open Settings</button>
-  `;
+  contentDiv.textContent = '';
+
+  const statusDiv = document.createElement('div');
+  statusDiv.className = 'status error';
+  statusDiv.textContent = message;
+  contentDiv.appendChild(statusDiv);
+
+  if (/(bit.?ly|token)/i.test(message)) {
+    const button = document.createElement('button');
+    button.className = 'copy-button';
+    button.textContent = 'Open Settings';
+    button.addEventListener('click', () => {
+      chrome.runtime.openOptionsPage();
+    });
+    contentDiv.appendChild(button);
+  }
 }
