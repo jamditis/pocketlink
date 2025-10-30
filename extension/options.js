@@ -23,7 +23,18 @@ const saveOptions = () => {
 
   chrome.storage.sync.set(settings, () => {
     const status = document.getElementById('status');
+
+    if (chrome.runtime.lastError) {
+      status.textContent = `Failed to save settings: ${chrome.runtime.lastError.message}`;
+      status.classList.add('error');
+      status.classList.remove('success');
+      status.style.opacity = 1;
+      return;
+    }
+
     status.textContent = 'Settings saved successfully!';
+    status.classList.add('success');
+    status.classList.remove('error');
     status.style.opacity = 1;
 
     setTimeout(() => {

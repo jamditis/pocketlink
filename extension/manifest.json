@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PocketLink",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Right-click on any page to create a shortlink and copy it to your clipboard.",
   "author": "Joe Amditis",
   "homepage_url": "https://github.com/jamditis/pocketlink",
@@ -9,9 +9,11 @@
     "contextMenus",
     "storage",
     "activeTab",
+    "tabs",
     "scripting",
     "notifications",
-    "offscreen"
+    "offscreen",
+    "windows"
   ],
   "host_permissions": [
     "https://api-ssl.bitly.com/"
