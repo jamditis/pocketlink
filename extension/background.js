@@ -1,17 +1,63 @@
 // background.js
 
+let offscreenDocumentCreated = false;
+
+const ensureOffscreenDocument = async () => {
+  if (!chrome.offscreen?.createDocument) {
+    throw new Error('Offscreen documents are not supported in this browser.');
+  }
+
+  if (chrome.runtime.getContexts) {
+    try {
+      const contexts = await chrome.runtime.getContexts({
+        contextTypes: ['OFFSCREEN_DOCUMENT'],
+        documentUrls: [chrome.runtime.getURL('offscreen.html')],
+      });
+
+      if (contexts.length > 0) {
+        return false;
+      }
+    } catch (error) {
+      console.warn('Failed to query offscreen contexts, creating a new one:', error);
+    }
+  } else if (offscreenDocumentCreated) {
+    return false;
+  }
+
+  const clipboardReason = chrome.offscreen.Reason?.CLIPBOARD ?? 'CLIPBOARD';
+
+  await chrome.offscreen.createDocument({
+    url: 'offscreen.html',
+    reasons: [clipboardReason],
+    justification: 'Write shortlink to clipboard',
+  });
+  offscreenDocumentCreated = true;
+  return true;
+};
+
 const copyToClipboard = async (text, tabId) => {
   try {
-    await chrome.scripting.executeScript({
+    const [result] = await chrome.scripting.executeScript({
       target: { tabId: tabId },
-      func: (textToCopy) => {
-        navigator.clipboard.writeText(textToCopy);
+      func: async (textToCopy) => {
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          return { success: true };
+        } catch (error) {
+          return { success: false, message: error.message };
+        }
       },
       args: [text],
     });
+
+    if (!result?.result?.success) {
+      throw new Error(result?.result?.message || 'Clipboard write failed');
+    }
+
     console.log('Successfully copied to clipboard:', text);
   } catch (err) {
     console.error('Failed to copy text: ', err);
+    throw err;
   }
 };
 
@@ -145,28 +191,38 @@ async function handleShortlink(shortUrl, settings, tab) {
 
 // Copy via offscreen document (Chrome 109+)
 async function copyViaOffscreen(shortUrl, settings) {
-  // Create offscreen document if it doesn't exist
-  const existingContexts = await chrome.runtime.getContexts({
-    contextTypes: ['OFFSCREEN_DOCUMENT'],
-    documentUrls: [chrome.runtime.getURL('offscreen.html')]
-  });
-
-  if (existingContexts.length === 0) {
-    await chrome.offscreen.createDocument({
-      url: 'offscreen.html',
-      reasons: [chrome.offscreen.Reason.CLIPBOARD],
-      justification: 'Write shortlink to clipboard'
-    });
+  let createdContext = false;
+  try {
+    createdContext = await ensureOffscreenDocument();
+  } catch (error) {
+    console.error('Offscreen clipboard copy is unavailable:', error);
+    throw error;
   }
 
   // Send message to offscreen document
-  chrome.runtime.sendMessage({
-    action: 'copyToClipboard',
-    text: shortUrl
-  });
+  try {
+    const response = await chrome.runtime.sendMessage({
+      action: 'copyToClipboard',
+      text: shortUrl
+    });
 
-  if (settings.showNotifications) {
-    showNotification('Shortlink created and copied to clipboard!');
+    if (!response?.success) {
+      throw new Error(response?.error || 'Clipboard write failed');
+    }
+
+    if (settings.showNotifications) {
+      showNotification('Shortlink created and copied to clipboard!');
+    }
+  } finally {
+    if (createdContext) {
+      try {
+        await chrome.offscreen.closeDocument();
+      } catch (error) {
+        console.warn('Failed to close offscreen document:', error);
+      } finally {
+        offscreenDocumentCreated = false;
+      }
+    }
   }
 }
 
@@ -183,3 +239,36 @@ async function showInPopup(shortUrl) {
     height: 200
   });
 }
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'createShortlinkFromPopup') {
+    (async () => {
+      try {
+        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+        if (!tab || !tab.url) {
+          sendResponse({ success: false, error: 'No active tab is available to shorten.' });
+          return;
+        }
+
+        const settings = await chrome.storage.sync.get({
+          bitlyToken: '',
+          showNotifications: true
+        });
+
+        if (!settings.bitlyToken) {
+          sendResponse({ success: false, error: 'Please set your Bitly API key in the options.' });
+          return;
+        }
+
+        const shortUrl = await createShortlink(tab.url, settings.bitlyToken);
+        sendResponse({ success: true, shortUrl });
+      } catch (error) {
+        console.error('Popup shortlink creation failed:', error);
+        sendResponse({ success: false, error: error.message });
+      }
+    })();
+
+    return true;
+  }
+});
