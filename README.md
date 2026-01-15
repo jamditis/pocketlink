@@ -1,6 +1,12 @@
 ![Screenshot of context menu option for PocketLink use](https://i.imgur.com/1np0wwh.png) 
 # **PocketLink**
 
+[![GitHub stars](https://img.shields.io/github/stars/jamditis/pocketlink?style=flat-square)](https://github.com/jamditis/pocketlink/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/jamditis/pocketlink?style=flat-square)](https://github.com/jamditis/pocketlink/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/jamditis/pocketlink?style=flat-square)](https://github.com/jamditis/pocketlink/issues)
+[![GitHub license](https://img.shields.io/github/license/jamditis/pocketlink?style=flat-square)](https://github.com/jamditis/pocketlink/blob/main/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/jamditis/pocketlink?style=flat-square)](https://github.com/jamditis/pocketlink/commits)
+
 **Effortless shortlinks, right where you need them.**
 
 PocketLink is a lightweight and secure Chromium browser extension that creates a Bit.ly shortlink for the current page and copies it to your clipboard in a single click. It's built to be fast, unobtrusive, and feel like a native part of your browser.
